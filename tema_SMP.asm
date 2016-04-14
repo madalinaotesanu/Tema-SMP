@@ -364,7 +364,7 @@ proc Mutare_snake
     cmp coada_y,ah
     jne Modif_coada
     
-     
+    ;schimbare directie coada    
     Schimba_coada_d:
     ;sus 
     mov al,Intoarcere[si]
@@ -446,16 +446,12 @@ proc Mutare_snake
     inc Marime_sarpe
     
     urmeaza:
-
     cmp cap_d,1
     je sus
-    
     cmp cap_d,2
     je dreapta
-    
     cmp cap_d,3
     je jos
-    
     cmp cap_d,4
     je stanga 
     
@@ -464,21 +460,22 @@ proc Mutare_snake
     sus:
     dec cap_y
     jmp muta 
+	
     dreapta:
     inc cap_x
     jmp muta
+	
     jos:
     inc cap_y
     jmp muta
+	
     stanga:
     dec cap_x
     
     
     muta:
-    
  ;Verifica daca sarpele mananca
     call Sarpe_m
-    
  ;Verifica daca jocul a fost pierdut
     call Verific_pierd
     pop ax
@@ -552,7 +549,7 @@ proc Sarpe_m
     ret
 endp Sarpe_m
 
-; Functia Mancare_noua genereaza in joc pozitii random cu mancare
+;Functia Mancare_noua genereaza in joc pozitii random cu mancare
 proc Mancare_noua
     afla_y: 
     random camp_y
@@ -607,6 +604,7 @@ proc Mancare_noua
     ret
 endp
 
+
 ;se verifica daca se pierde jocul
 proc Verific_pierd
     
@@ -633,6 +631,7 @@ proc Verific_pierd
     push [150]
     ret
 endp Verific_pierd
+
 
 ;afiseaza un mesajul "Game Over", alaturi de un sunet beep
 proc Sfarsit_joc
@@ -673,7 +672,6 @@ mov dl, 07h ;07h este valoarea care produce sunetul beep
 int 21h ;produce efectiv sunetul
 int 20h
 endp Sunet
-
 
 
 ;stergerea tuturor registrilor
@@ -722,7 +720,6 @@ Marime_sarpe db 1
 Mananca_sarpele db 0
                 
               
- 
  
 ;Valori 
 Points dw 0d
